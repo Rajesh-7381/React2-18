@@ -1,0 +1,68 @@
+*{
+    margin: 0;
+    padding: 0;
+    
+}
+
+/* dashboard */
+.topNav{
+    overflow: hidden;
+    background-color: #333;
+    
+}
+.topNav #linktag {
+    float: left;
+    display: flex;
+    color: #f2f2f2;
+    padding: 16px 14px;
+    text-decoration: none;
+    text-align: center;
+    font-size: 17px;
+    
+}
+.topNav #linktag:hover{
+    background-color: #ddd;
+    color: black;
+
+}
+.topNav #linktag.active{
+    background-color: #04AA6D;
+    color: white;
+}
+.topNav .icon{
+    display: none;
+}
+@media screen and (max-width:600px){
+    .topNav #linktag:not(:first-child){display: none;}
+    .topNav #linktag .icon{
+        float: right;
+        display: block;
+    }
+}
+@media screen and (max-width:600px){
+    .topNav.responsive{position: relative;}
+    .topNav.responsive .icon{
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .topNav.topNav.responsive #linktag{
+        float: none;
+        display: block;
+        text-align: left;
+    }
+}
+#logoutlink{
+    float: right;
+    padding-top: 13px;
+    padding-right: 80px;
+    text-decoration: none;
+    color: white;
+}
+
+/* for tictactoe */
+#tictactoediv{
+    height: 100px;
+    width: 100px;
+    background-color: red;
+}

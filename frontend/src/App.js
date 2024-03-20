@@ -4,6 +4,8 @@ import './App.css';
 import 'react-notifications/lib/notifications.css';
 import Register from './Views/Register';
 import Login from './Views/Login';
+import Dashboard from './Views/Dashboard';
+import Tictactoe from './Views/Tictactoe';
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
         <Routes>
           <Route path='/' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
+          <Route path='/dashboard' element={<Dashboard/>} />
+          <Route path='/tictactoe' element={<Tictactoe/>} />
         </Routes>
       </BrowserRouter>
     </div>
