@@ -60,9 +60,103 @@
     color: white;
 }
 
+/* dashboard cssroundedcorners */
+#cssroundedcorners{
+    height: 100px;
+    width: 100px;
+    background: #73AD21;
+    border-radius: 50%;
+    padding: 20px;
+    color: whitesmoke;
+    background-image: repeating-conic-gradient(red 10%, yellow 20%);
+  /* border-radius: 50%; */
+}
+
 /* for tictactoe */
 #tictactoediv{
     height: 100px;
     width: 100px;
     background-color: red;
 }
+
+/* csv button styling */
+#csvbtnright{
+    float: right;
+    
+}
+
+/* sidebar dashboard */
+#animatedivid{
+    height: 100px;
+    width: 100px;
+    /* border-radius: 50%; */
+    background-color: aquamarine;
+    text-align: start;
+    border: 2px solid black;
+    top: 100px;
+    left: 100px;
+    animation-name: colorAnimate;
+    animation-duration: 3s;
+    animation-timing-function: ease-in;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+}
+@keyframes colorAnimate{
+    /* from */
+    0% {  background-color: aquamarine;
+            /* top: 0px; */
+        }
+    50%{
+        background-color: green;
+    }    
+
+    /* to */
+    100% {    background-color: red;
+            /* top: 200px; */
+            color: white;
+    }
+}
+
+#animatedivid2{
+    height: 100px;
+    width: 100px;
+    border-radius: 50%;
+    border: 10px solid yellow;
+    border-left: 10px solid aqua;
+    animation: spinAnimate 2s ease-in infinite none ;
+}
+@keyframes spinAnimate{
+    from{
+        transform: rotate(0deg);
+    }
+    to{
+        transform: rotate(360deg);
+    }
+}
+
+/* tictactoe */
+#board{
+    margin-left: auto;
+    margin-right: auto;
+    height: 375px;
+    width: 375px;
+    display: grid;
+    background-color: #04AA6D;
+    grid-template-columns: repeat(3,1fr);
+    grid-gap: 5px;
+}
+.square{
+    height: 120px;
+    width: 120px;
+    border: 1px solid #D3D3D3;
+    background-color: #f5f5f5;
+    font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.square:hover{
+    background-color: #FFFFE0;
+    cursor: pointer;
+}
+
