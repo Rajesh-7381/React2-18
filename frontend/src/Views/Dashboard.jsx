@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import {CSVLink} from 'react-csv';
 import './All.css';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 const Dashboard = () => {
     const [loading, setLoading] = useState(true);
@@ -99,6 +100,38 @@ const Dashboard = () => {
     row.email.toLowerCase().includes(searchQuery.toLowerCase())
 );
 
+    // modals shown
+  const [modal, setModal] = useState(false);
+    //   inside modal data shown
+  const [modalData, setModalData] = useState({});
+  const toggle = async(id) => {
+    // alert(id);
+    try {
+        const response=await axios.get(`http://localhost:8081/getSingleData/${id}`);
+        setModalData(response.data.data);
+        setModal(!modal)
+    } catch (error) {
+        // console.error('Error fetching data:', error);
+    }
+    setModal(!modal);
+  };
+
+  const externalCloseBtn = (
+    <button
+      type="button"
+      className="bi-eye"
+      style={{ position: 'absolute', top: '15px', right: '15px' }}
+      onClick={toggle}
+    >
+      &times;
+    </button>
+  );
+//   edit functionality
+const navigate=useNavigate();
+const editdata=(row)=>{
+    navigate(`/update/${row.id}`,{state:{data:row}}); //this is an optional state object that can be passed to the new location being navigated  to.  In this case, it includes a data property set to the row object. This allows you to pass data between routes using React Router's location state feature
+}
+
     return (
         <div>
             <div className='topNav' id='topNav'>
@@ -115,7 +148,7 @@ const Dashboard = () => {
                     <div className="col-md-9">
                         <div>
                             <h4 className='textcenter' style={{borderLeft:"10px solid green ",textShadow:"2px 2px 4px #000000",color:"coral"}}>Table Data</h4>
-                           <input type="search" onChange={(e)=>setSearchQuery(e.target.value)} />
+                           <input type="search" onChange={(e)=>setSearchQuery(e.target.value)} placeholder='Search............'/>
                            <label htmlFor="search"><button className='btn btn-success'>Search</button></label>
                             <CSVLink data={Data} headers={headers} filename='Static_users.csv'> <button id='csvbtnright' className='btn btn-primary '>Export CSV</button> </CSVLink>
                                 
@@ -145,8 +178,8 @@ const Dashboard = () => {
                                                 <td>{row.uname}</td>
                                                 <td>{row.email}</td>
                                                 <td>
-                                                <button  className='btn  btn-sm btn-dark ' data-toggle="modal" data-target="exampleModalCenter"><i className='bi bi-eye'><Link to={row.id}></Link></i></button>
-                                                <button className='btn  btn-sm btn-success'><i className='bi bi-pencil'></i></button>
+                                                <button  className='btn  btn-sm btn-dark ' onClick={()=>toggle(row.id)}><i className='bi bi-eye'><Link ></Link></i></button>
+                                                <button className='btn  btn-sm btn-success' onClick={()=>editdata(row)}><i className='bi bi-pencil'></i></button>
                                                 <button onClick={()=>deleteData(row.id)} className='btn  btn-sm btn-danger'><i className='bi bi-trash'></i></button>
                                                 </td>
                                             </tr>
@@ -183,6 +216,29 @@ const Dashboard = () => {
                                                
                     </div>
                 </div>
+            </div>
+            <div>
+            <Modal isOpen={modal} toggle={toggle} external={externalCloseBtn}>
+            <ModalHeader><h4>Hi <span style={{color:"red"}}>{modalData.fname}</span> below your Details</h4></ModalHeader>
+            <ModalBody>
+              <b>Look at the top right of the page/viewport!</b>
+              <br />
+                <p>ID: <span style={{color:"blue",fontWeight:"bold"}}>{modalData.id}</span></p>
+                <p>First Name: <span style={{color:"blue",fontWeight:"bold"}}>{modalData.fname}</span></p>
+                <p>Last Name: <span style={{color:"blue",fontWeight:"bold"}}>{modalData.lname}</span></p>
+                <p>Username: <span style={{color:"blue",fontWeight:"bold"}}>{modalData.uname}</span></p>                
+                <p>Email: <span style={{color:"blue",fontWeight:"bold"}}>{modalData.email}</span></p>
+                <p>Gender: <span style={{color:"blue",fontWeight:"bold"}}>{modalData.gender}</span></p>
+            </ModalBody>
+            <ModalFooter>
+              <Button color="success" onClick={toggle}>
+                Ok
+              </Button>{' '}
+              <Button color="danger" onClick={toggle}>
+                Cancel
+              </Button>
+            </ModalFooter>
+          </Modal>
             </div>
             
         </div>

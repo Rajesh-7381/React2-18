@@ -47,6 +47,9 @@ install bootstarp icons ->npm install bootstrap-icons
     <!-- React csv functionality -->
     ->npm i react-csv (after installing react-csv functionality shown)
 
+    <!-- to install  react modal -->
+    ->npm install reactstrap bootstrap
+
 
 <!--create a backend  -->
         ->create a backend folder
@@ -60,4 +63,11 @@ install bootstarp icons ->npm install bootstrap-icons
         ->npm install passport-google-oauth20(google auth)
         ->npm install express-session
         ->npm install bcrypt(for password bcrypt purpose)
-            
+        ->npm install express-fileupload (for fileupload purpose)
+
+
+
+
+note(bug)
+    1.image was not inserted    
+       

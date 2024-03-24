@@ -40,7 +40,7 @@ const Amazon = () => {
         </div>
         <div className="panel">
                 <div className="panel-all">
-                <i class="bi bi-menu-button-wide-fill"></i>All
+                    <i class="bi bi-menu-button-wide-fill"></i>All
                 </div>
                 <div className="panel-ops">
                     <p>Today's Seals</p>
@@ -52,9 +52,23 @@ const Amazon = () => {
                 <div className="panel-deals">
                     Shop deals In Electronics
                 </div>
-            </div>
+        </div>
         
       </header>
+      <div className="hero-section">
+        <div className="hero-msg">
+            You are on amazon.com. You can also shop on Amazon India for millions of products with fast local delivery. <a href="https://www.amazon.com/"> Click here to go to amazon.in
+            </a>
+        </div>
+      </div>
+      <div className="shop-section">
+        <div className="box1 box">box1</div>
+        <div className="box2 box">box2</div>
+        <div className="box3 box">box3</div>
+        <div className="box4 box">box4</div>
+        <div className="box5 box">box5</div>
+      </div>
+
     </div>
   )
 }

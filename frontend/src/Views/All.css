@@ -160,3 +160,8 @@
     cursor: pointer;
 }
 
+/* update.jsx */
+#imageheightwidth{
+    height: 100px;
+    width: 100px;
+}

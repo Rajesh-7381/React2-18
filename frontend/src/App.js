@@ -8,6 +8,7 @@ import Dashboard from './Views/Dashboard';
 import Tictactoe from './Views/Tictactoe';
 import Amazon from './Views/Amazon';
 import Home from './Views/Home';
+import Update from './Views/Update';
 
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Register/>} />
           <Route path='/login' element={<Login/>} />
+          <Route path='/update/:id' element={<Update/>} />
           <Route path='/dashboard' element={<Dashboard/>} />
           <Route path='/tictactoe' element={<Tictactoe/>} />
           <Route path='/amazon' element={<Amazon/>} />
