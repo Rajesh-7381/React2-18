@@ -152,7 +152,7 @@ const editdata=(row)=>{
                            <label htmlFor="search"><button className='btn btn-success'>Search</button></label>
                             <CSVLink data={Data} headers={headers} filename='Static_users.csv'> <button id='csvbtnright' className='btn btn-primary '>Export CSV</button> </CSVLink>
                                 
-                            <table className='table table-bordered border-primary table-striped'>
+                            <table className='table table-bordered border-primary table-striped table_section tablecss'>
                                 <thead>
                                     <tr>
                                         <th>ID</th>

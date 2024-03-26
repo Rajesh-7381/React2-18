@@ -92,7 +92,7 @@ const Register = () => {
       
             <div className='row justify-content-center'>
                 <div className='col-sm-6'>
-                    <div className='card p-4 border border-2 border-dark'>
+                    <div className='card p-4 border border-2 border-dark' id=''>
                         <div className="form-switch text-start"> {/* Added wrapping div for checkbox and label */}
                             <input type="checkbox" name="theme" id="theme" onChange={themechange} />
                             <label htmlFor="theme" className="ml-2">Dark Mode</label> {/* Added margin to the label */}

@@ -9,6 +9,7 @@ import Tictactoe from './Views/Tictactoe';
 import Amazon from './Views/Amazon';
 import Home from './Views/Home';
 import Update from './Views/Update';
+import Cart from './Views/Cart';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard/>} />
           <Route path='/tictactoe' element={<Tictactoe/>} />
           <Route path='/amazon' element={<Amazon/>} />
+          <Route path='/cart' element={<Cart/>} />
           <Route path='/ecom' element={<Home/>} />
          
         </Routes>

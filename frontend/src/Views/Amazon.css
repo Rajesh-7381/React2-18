@@ -118,7 +118,7 @@ span{
 
 /* hero sectio slider */
 .hero-section{
-    background-image: url(https://m.media-amazon.com/images/I/71KfZkbgStL._SX3000_.jpg);
+    background-image: url("https://m.media-amazon.com/images/I/71KfZkbgStL._SX3000_.jpg");
     background-size: cover;
     height: 600px;
     display: flex;
@@ -139,7 +139,130 @@ span{
     color: #007185;
 }
 /* shop section */
-.box{
-    height: 100px;
-    border: 2px solid red;
+.shop-section{
+    display: flex;
+    justify-content: space-evenly; 
+    background-color: #e2e7e6; 
 }
+
+.box{
+    height: 400px;
+    border: 2px solid red;
+    width: 23%;
+}
+/* styles.css */
+.box1 {
+    background-image: url("./easter-3123834_640.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    /* align-items: center; */
+    min-height: 300px;
+    position: relative;
+
+}
+.box5 {
+    background-image: url("./Fuji_Easter_Dash_card_1x_EN._SY304_CB581341381_.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box2 {
+    background-image: url("./61t4mpabO+L._AC_SX679_.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+    max-width: 100%;
+    height: auto; 
+    object-fit: contain;
+}
+.box3 {
+    background-image: url("./Fuji_Desktop_Single_image_EBF_1x_v1._SY304_CB573698005_.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.box4 {
+    background-image: url("./41aF1Kpc1iL._SY160_.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    object-fit: fill;
+}
+
+#btndata{
+    /* justify-content: center; */
+    align-self: center; /* Center the button horizontally */
+    margin-top: 10px;
+}
+#box-image{
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    padding: 20px;
+}
+
+/* cart items */
+.cart-page{
+    margin: 80px auto;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+.cart-info{
+    display: flex;
+    flex-wrap: wrap;
+}
+th{
+    text-align: left;
+    /* padding: 5px; */
+    color: black;
+    background-color: #ff523b;
+    font-weight: normal;
+}
+td{
+    padding: 10px 5px ;
+}
+td input{
+    height: 40px;
+    width: 50px;
+    padding: 5px;
+}
+td a{
+    color: #ff523b;
+}
+td img{
+    height: 80px;
+    width: 80px;
+    margin-right: 10px;
+}
+.total-price{
+    display: flex;
+    justify-content: flex-end;
+}
+.total-price table{
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 1050px;
+}
+td:last-child{
+    text-align: right;
+}
+th:last-child{
+    text-align: right;
+}
+
+@media only screen and (max-width:600px){
+    .cart-info p{
+        display: none;
+    }
+    .box1{
+        height: auto;
+        width: 200px;
+    }
+}
+/* .rightend{
+    display: flex;
+    justify-content: flex-end;
+    align-items: end;
+} */

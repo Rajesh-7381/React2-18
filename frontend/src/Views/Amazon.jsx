@@ -1,6 +1,11 @@
 import React from 'react'
 import './Amazon.css';
+import { useNavigate } from 'react-router-dom';
 const Amazon = () => {
+    const navigate=useNavigate();
+    const ADDTOCART=()=>{
+        navigate("/cart");
+    }
   return (
     <div>
       <header>
@@ -62,11 +67,37 @@ const Amazon = () => {
         </div>
       </div>
       <div className="shop-section">
-        <div className="box1 box">box1</div>
-        <div className="box2 box">box2</div>
-        <div className="box3 box">box3</div>
-        <div className="box4 box">box4</div>
-        <div className="box5 box">box5</div>
+        <div className="box1 box">
+            <div id='box-image'>            
+            <h2>Health And Personal Care</h2>
+            </div>
+            <p>see more</p>
+            <button className='btn btn-primary w-75 ' id='btndata' onClick={ADDTOCART}>Add To Cart</button>
+        </div>
+        <div className="box2 box">
+            <h2>Gaming accessories</h2>
+            <div id='box-image2'>
+                <p>see more</p>
+            </div>
+        </div>
+        <div className="box3 box">
+            <h2>Deals in PCs</h2>
+            <div id='box-image2'>
+                <p>see more</p>
+            </div>
+        </div>
+        <div className="box4 box">
+            <h2>Amazon Gadget Store</h2>
+            <div id='box-image2'>
+                <p>see more</p>
+            </div>
+        </div>
+        <div className="box5 box">
+            <h2>Fill your Easter basket with joy</h2>
+            <div id='box-image2'>
+                <p>see more</p>
+            </div>
+        </div>
       </div>
 
     </div>

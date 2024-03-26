@@ -19,8 +19,7 @@ const Update = () => {
   useEffect(() => {
     document.title = 'Update';
     fetchData();
-  }, []);//useffect pass 2 parameter i,e function and  array (optional) if we pass array it means one time uploaded if we pass empty array or array it updates every time when component rerendering
-
+  });//useffect pass 2 parameter i,e function and  array (optional) if we pass array it means one time uploaded if we pass empty array or array it updates every time when component rerendering
   const [error, setError] = useState("");
 
   const fetchData = async () => {
