@@ -128,9 +128,10 @@ const Dashboard = () => {
   );
 //   edit functionality
 const navigate=useNavigate();
-const editdata=(row)=>{
-    navigate(`/update/${row.id}`,{state:{data:row}}); //this is an optional state object that can be passed to the new location being navigated  to.  In this case, it includes a data property set to the row object. This allows you to pass data between routes using React Router's location state feature
-}
+const editdata = (row) => {
+    navigate(`/update/${row.id}`, { state: { data: row } });
+  }; //this is an optional state object that can be passed to the new location being navigated  to.  In this case, it includes a data property set to the row object. This allows you to pass data between routes using React Router's location state feature
+
 
     return (
         <div>

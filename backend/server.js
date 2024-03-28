@@ -6,7 +6,8 @@ const jwt=require("jsonwebtoken");
 // const fileupload=require("express-fileupload");
 const path=require("path");
 const multer = require('multer');
-
+const moment=require("moment");
+const { error } = require("console");
 
 const app = express();
 app.use(cors());
@@ -15,16 +16,8 @@ app.use(express.json());
 // /middleware to handle fileuploads
 // app.use(fileupload())
 
-// Set up multer storage
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/images'); // Destination folder for storing images
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-const upload = multer({ storage: storage });
+
+// const upload = multer({ storage: storage });
 
 const db = mysql.createPool({
   host: "localhost",
@@ -140,29 +133,59 @@ app.get('/updateData/:id',async(req,res)=>{
   })
 })
 
+// for image insert
+// Set up multer storage
+const imgconfig = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, './uploads'); // Destination folder for storing images
+  },
+  filename: (req, file, callback) => {
+    callback(null, `image-${Date.now()}.${file.originalname}`);
+  }  
+});
+const isimage = (req, file, callback) => {
+  if (file.mimetype.startsWith("image")) {
+    callback(null, true);
+  } else {
+    callback(null, Error("Only images are allowed!")); // Changed message
+  }
+}
+
+var upload=multer({
+  storage:imgconfig,
+  fileFilter:isimage
+})
+
 // updateform data
-app.put('/updateData/:id', upload.single('image'), async (req, res) => {
-  const { fname, lname, uname, email, gender } = req.body;
+
+app.put('/updateData/:id', upload.single('photo'), async (req, res) => {
   const id = req.params.id;
-  let imageFileName = null;
+  const { fname, lname, uname, email, gender } = req.body;
+  const filename = req.file.filename; // Corrected: Retrieve filename from req.file
 
-  // if (req.file) {
-  //   const image = req.files.image;
-  //   imageFileName = `${id}_${image.name}`;
-  //   await image.mv(path.join(__dirname, '../frontend/public/images', imageFileName));
+  if (!fname || !lname || !uname || !email || !gender || !filename) {
+    return res.status(422).json({ status: 422, message: "Fill all details!" }); // Return added
+  }
 
-  // }
-
-  const sql = "UPDATE signup SET fname=?, lname=?, uname=?, email=?, gender=?, image=? WHERE id=?";
-  
   try {
-    await db.promise().query(sql, [fname, lname, uname, email, gender, imageFileName, id]);
-    res.status(200).json({ message: "Data updated successfully" });
+    let date = moment(new Date()).format("YYYY-MM-DD hh:mm:ss");
+    const sql = "UPDATE signup SET fname=?, lname=?, uname=?, email=?, gender=?, image=? WHERE id=?";
+    // Corrected db.query call
+    db.query(sql, [fname, lname, uname, email, gender, filename, id], (err, result) => {
+      if (err) {
+        console.error("Error updating data:", err);
+        return res.status(500).json({ message: "Error updating data" });
+      } else {
+        console.log("Data updated successfully");
+        return res.status(200).json({ message: "Data updated successfully" });
+      }
+    });
   } catch (error) {
     console.error("Error updating data:", error);
-    res.status(500).json({ message: "Error updating data" });
+    return res.status(500).json({ message: "Error updating data" });
   }
 });
+
 
 app.listen(8081, () => {
   console.log("Server listening on port 8081"); // Corrected the console.log message

@@ -2,6 +2,9 @@ import React from 'react'
 import './Amazon.css';
 
 const Cart = () => {
+  const payment=()=>{
+    console.log("23")
+  }
   return (
     <div>
       <div className="small-container acrt-page">
@@ -37,7 +40,7 @@ const Cart = () => {
                 <td>$70.00</td>
               </tr>   
               <tr>
-              <td><button className='btn btn-primary'>PAY</button></td>
+              <td><button onClick={payment} className='btn btn-primary'>PAY</button></td>
               </tr>      
 
           </table>
