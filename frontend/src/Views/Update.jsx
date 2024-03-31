@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import './All.css';
+import moment from "moment";
 
 const Update = () => {
   const { id } = useParams();
@@ -13,6 +14,9 @@ const Update = () => {
   const [email, setEmail] = useState("");
   const [gender, setGender] = useState("");
   const [photo, setPhoto] = useState("");
+  // for image shwown purpose
+  const [existingImage, setExistingImage] = useState(null); // State to hold existing image URL
+
 
   useEffect(() => {
     document.title = 'Update';
@@ -30,6 +34,9 @@ const Update = () => {
       setUname(data.uname);
       setEmail(data.email);
       setGender(data.gender);
+      if(data.image){
+        setExistingImage(`http://localhost:8081/uploads/${data.image}`);
+      }
     } catch (error) {
       console.error('Error fetching data:', error);
       setError('Failed to fetch data. Please try again later.');
@@ -74,12 +81,13 @@ const Update = () => {
                   <form onSubmit={handleSubmit} encType="multipart/form-data">
                     {error && <div className="alert alert-danger">{error}</div>}
                     <div className="text-center">                
-                      <img src="" alt="Uploaded" />                                     
+                    {existingImage && <img src={existingImage} alt="Uploaded"  style={{ maxWidth: "200px", maxHeight: "200px",borderRadius: "50%" }}/>} {/* Display existing image if it exists */}                                   
                       <input
                         type="file"
                         onChange={(e) => setPhoto(e.target.files[0])}
                         name="photo"
                       />
+                      
                     </div>
                     <div className="row">
                       <div className="col-md-6 mb-4">

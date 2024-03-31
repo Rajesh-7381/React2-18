@@ -50,6 +50,8 @@ install bootstarp icons ->npm install bootstrap-icons
     <!-- to install  react modal -->
     ->npm install reactstrap bootstrap
 
+    <!-- to show data time -->
+    ->npm i moment
 
 <!--create a backend  -->
         ->create a backend folder
@@ -64,6 +66,9 @@ install bootstarp icons ->npm install bootstrap-icons
         ->npm install express-session
         ->npm install bcrypt(for password bcrypt purpose)
         ->npm install express-fileupload (for fileupload purpose)
+        ->npm install multer (for image upload)
+        ->npm install moment (for date)
+        ->npm i fs
 
 
 

@@ -1,13 +1,24 @@
 import React from 'react'
 import './Amazon.css';
+import {loadStripe} from '@stripe/stripe-js';
+
+const stripePromise = loadStripe('pk_test_51O4a72SHw6r4P7p3lRcPeLEdr5MlKBBt9O4hJGgIz5uHbedh6yzVa2YTv7dNcRazWeZIe9WmdYgjz3KjinL8ZvnC00IR7KUVcj');
+
 
 const Cart = () => {
-  const payment=()=>{
-    console.log("23")
-  }
+  const payment = async () => {
+    const stripe = await stripePromise;
+    const { error } = await stripe.redirectToCheckout({
+      lineItems: [{ price: 'price_id', quantity: 1 }],
+      mode: 'payment',
+      successUrl: 'https://your-website.com/success',
+      cancelUrl: 'https://your-website.com/cancel',
+    
+  });
+}
   return (
     <div>
-      <div className="small-container acrt-page">
+      <div className="small-container cart-page">
         <table>
           <tr>
             <th>product</th>

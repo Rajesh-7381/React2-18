@@ -8,6 +8,7 @@ const path=require("path");
 const multer = require('multer');
 const moment=require("moment");
 const { error } = require("console");
+const fs=require("fs");
 
 const app = express();
 app.use(cors());
@@ -90,16 +91,55 @@ app.get('/alldata',(req,res)=>{
 // delete data
 app.get('/deletedata/:id', async (req, res) => {
   const id = req.params.id;
+
+  try {
+    // First, fetch the image filename from the database
+    const query = "SELECT image FROM signup WHERE id = ?";
+    db.query(query, id, (err, result) => {
+      if (err) {
+        console.error("Error fetching image filename:", err);
+        return res.status(500).json({ message: "Internal server error" });
+      }
+
+      // If the query was successful
+      const filename = result[0].image;
+
+      // If a filename exists, attempt to delete the corresponding file
+      if (filename) {
+        fs.unlink(`./uploads/${filename}`, (err) => {
+          if (err) {
+            console.error("Error deleting image file:", err);
+            return res.status(500).json({ message: "Error deleting image file" });
+          }
+
+          // If the file is deleted successfully, proceed to delete the record from the database
+          deleteRecordFromDatabase(id, res);
+        });
+      } else {
+        // If no filename was found in the database, proceed to delete the record from the database directly
+        deleteRecordFromDatabase(id, res);
+      }
+    });
+  } catch (error) {
+    console.error("Error deleting data:", error);
+    return res.status(500).json({ message: "Error deleting data" });
+  }
+});
+
+// Function to delete record from the database
+function deleteRecordFromDatabase(id, res) {
   const sql = "DELETE FROM signup WHERE id = ?";
   db.query(sql, [id], (err, result) => {
     if (err) {
       console.error("Error deleting data:", err);
       return res.status(500).json({ message: "Internal server error" });
     }
+
     // Data deleted successfully
     res.status(200).json({ message: "Data deleted successfully" });
   });
-});
+}
+
 
 // getSingleData
 app.get('/getSingleData/:id',async(req,res)=>{
@@ -176,7 +216,7 @@ app.put('/updateData/:id', upload.single('photo'), async (req, res) => {
         console.error("Error updating data:", err);
         return res.status(500).json({ message: "Error updating data" });
       } else {
-        console.log("Data updated successfully");
+        // console.log("Data updated successfully");
         return res.status(200).json({ message: "Data updated successfully" });
       }
     });
@@ -186,6 +226,8 @@ app.put('/updateData/:id', upload.single('photo'), async (req, res) => {
   }
 });
 
+// for acessing image to shown in frontend
+app.use("/uploads",express.static("./uploads"));
 
 app.listen(8081, () => {
   console.log("Server listening on port 8081"); // Corrected the console.log message
