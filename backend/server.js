@@ -11,7 +11,6 @@ const { error } = require("console");
 const fs=require("fs");
 // stripe secret key 
 // Import the `stripe` module and initialize it with your secret key
-const stripe = require("stripe")("sk_test_51O4a72SHw6r4P7p3nVu4b3NwuzCys6zP2GTFRsVDglopUnRfE5Ih3QxOP5dKmKbtSrYvZtfWTjqQAOxbeZdXIkIb00WJX3O60b")
 
 const app = express();
 app.use(cors());
