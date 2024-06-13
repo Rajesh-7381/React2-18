@@ -9,6 +9,9 @@ const multer = require('multer');
 const moment=require("moment");
 const { error } = require("console");
 const fs=require("fs");
+// stripe secret key 
+// Import the `stripe` module and initialize it with your secret key
+const stripe = require("stripe")("sk_test_51O4a72SHw6r4P7p3nVu4b3NwuzCys6zP2GTFRsVDglopUnRfE5Ih3QxOP5dKmKbtSrYvZtfWTjqQAOxbeZdXIkIb00WJX3O60b")
 
 const app = express();
 app.use(cors());
@@ -228,6 +231,45 @@ app.put('/updateData/:id', upload.single('photo'), async (req, res) => {
 
 // for acessing image to shown in frontend
 app.use("/uploads",express.static("./uploads"));
+
+// payment
+
+// Update the `/api/create-checkout-session` endpoint to handle the request
+app.post("/api/create-checkout-session", async (req, res) => {
+  const { products } = req.body;
+  console.log(products)
+
+  const lineItems = products.map((item) => ({
+    price_data: {
+      currency: 'usd', // Update currency if needed
+      product_data: {
+        name: item.dish, // Replace with the appropriate property for product name
+      },
+      unit_amount: item.price * 100, // Convert price to cents
+    },
+    quantity: item.qnty, // Assuming each item has a quantity property
+  }));
+  
+  
+
+  try {
+    // Create a new checkout session
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ["card"],
+      line_items: lineItems,
+      mode: "payment",
+      success_url: "http://localhost:3000/success", // Update success URL
+      cancel_url: "http://localhost:3000/cancel" // Update cancel URL
+    });
+
+    // Return the session ID to the client
+    res.json({ id: session.id });
+  } catch (error) {
+    console.error("Error creating checkout session:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
 
 app.listen(8081, () => {
   console.log("Server listening on port 8081"); // Corrected the console.log message

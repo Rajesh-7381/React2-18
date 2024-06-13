@@ -53,6 +53,24 @@ install bootstarp icons ->npm install bootstrap-icons
     <!-- to show data time -->
     ->npm i moment
 
+    <!-- to use react redux -->
+    ->npm i redux react-redux
+
+    <!-- for magnifying image -->
+   -> npm i react-magnify-image (in react npm package)
+   <ReactImageMagnify {...{
+                smallImage: {
+                  alt: 'Item',
+                  isFluidWidth: true,
+                  src: item.imgdata
+                },
+                largeImage: {
+                  src: item.imgdata,
+                  width: 1200,
+                  height: 1800
+                }
+              }} />
+
 <!--create a backend  -->
         ->create a backend folder
         ->inside package.json to write("start":"nodemon server.js")
@@ -74,5 +92,5 @@ install bootstarp icons ->npm install bootstrap-icons
 
 
 note(bug)
-    1.image was not inserted    
+    1.image was not inserted  //solved   
        

@@ -13,7 +13,7 @@ const Register = () => {
         var theme = document.getElementById("theme");
         var form = document.querySelector("form");
         if (theme.checked) {
-            form.className = "border border-2 bg-dark ";
+            form.className = "border border-2 bg-dark text-light ";
         } else {
             form.className = "border border-2  ";
         }
